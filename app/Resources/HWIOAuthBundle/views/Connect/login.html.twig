@@ -1,0 +1,17 @@
+{% extends 'HWIOAuthBundle::layout.html.twig' %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li class="active">Login using Github</li>
+{% endblock %}
+
+{% block hwi_oauth_content %}
+<div class="row space">
+    <div class="span3 offset4 space">
+        {% for owner in hwi_oauth_resource_owners() %}
+            <a class="btn btn-large btn-block" href="{{ hwi_oauth_login_url(owner) }}"><i class="icon-github-alt"></i> Login with Github</a>
+        {% endfor %}
+        <br /><br />
+    </div>
+</div>
+{% endblock hwi_oauth_content %}

@@ -1,0 +1,11 @@
+
+<div class="fos_user_user_show well">
+    <p><strong>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</strong><br />{{ user.username }}</p>
+    <p><strong>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</strong><br />{{ user.email }}</p>
+    <p><strong>Website</strong><br />{{ user.homepage }}</p>
+    <br />
+    <p>
+        <a href="{{ path('user_profile', { 'name': user.username }) }}" class="btn"><i class="icon-user"></i> Show Profile</a>
+        <a href="{{ path('fos_user_profile_edit') }}" class="btn"><i class="icon-wrench"></i> Edit</a>
+    </p>
+</div>

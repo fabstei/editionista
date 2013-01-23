@@ -1,0 +1,43 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li class="active">About</li>
+{% endblock %}
+
+{% block alert %}
+    <div class="alert span6 offset2">
+        Please note that this about section is - as most things on Editionista - still only a stub.
+    </div>
+{% endblock %}
+    
+{% block content %}
+<div class="row-fluid">
+    <div class="span8 offset2">
+        <h1>All about Editionista</h1>
+        <p>Life, the Universe and Everything</p>
+        
+        <h2 class="space">What is Editionista?</h2>
+        <p>Editionista is a community driven hub for <a href="http://symfony.com/distributions">Symfony2 Distributions</a>. It aims to complement the <a href="http://symfony.com/download">official</a> Distributions (<a href="https://github.com/symfony/symfony-standard">Standard Edition</a> and <a href="https://github.com/symfony/symfony-hello-world">Hello World Edition</a>) with contributions by the community. You can <a href="{{ path('edition_add_list') }}">add your own</a> Distributions or <a href="{{ path('editions') }}">browse</a> those submitted by others.</p>
+
+        <h2 class="space">Symfony2 Distributions?</h2>
+        <p>Think of a Distribution (or Edition) as a boilerplate to help you jump-start new Projects based on Symfony2. Maybe you would like to start new Projects with some default templates or even a fully functional user management ready in place. Creating an Edition, you have to integrate everything just once and can re-use your setup for future projects - and finally also share it with the whole world.</p>
+        <br />
+        <blockquote>
+            <p>
+                <span class="muted">[...]</span> a Symfony distribution is made up of Symfony2 components, a selection of bundles, a directory structure, a default configuration, and an optional Web configuration system.
+            </p>
+            <small><cite title="Symfony2 Distributions"><a href="http://symfony.com/distributions">Symfony Distributions</a></cite></small>
+        </blockquote>
+        <p>While <a href="http://symfony.com">Symfony2</a> and <a href="https://github.com/knplabs/knpbundles">KnpBundles</a> provide the awesomeness made manageable  <a href="http://packagist.org/">Packagist</a> and <a href="http://getcomposer.org">Composer</a>, Editionista tries to glue everything together to comprehensive little packages suited for every need - thus Symfony2 in every flavour!</p>
+        <p>For additional thoughts on Symfony2 Distributions read Christian Schaefers excellent article <a href="http://www.testically.org/2011/03/21/symfony2-distributions-what-is-it-all-about/">Symfony2 distributions – what is it all about?</a>.</p>
+        
+        <h2 class="space">Contribute</h2>
+        <p>Apart from its basic idea and non-commercial character almost nothing about Editionista is set in stone. Put together out of personal need in very short time the project is still in a very early stage and open for every kind of contribution. You find the <a href="http://github.com/fabstei/editionista">projects source on Github</a>.</p>
+        
+        <h2 class="space">Credits</h2>
+        <p>Editionista is partially based on the source of <a href="http://packagist.org/">Packagist.org</a> by <a href="http://seld.be/">Jordi Boggiano</a>. The <a href="https://github.com/braincrafted/bootstrap-bundle">Bootstrap</a> integration for the forms and menues is borrowed from <a href="http://florianeckerstorfer.com/">Florian Eckerstorfer</a> For a list of all used bundles consult the projects <a href="https://github.com/fabstei/editionista/blob/master/composer.json">composer.json</a> on Github.</p>
+        <p>Special thanks for help and entertainment on IRC go to <a href="http://tim.nagel.com.au/">Tim Nagel</a>, <a href="https://github.com/alex88">Alessandro Tagliapietra</a> and <a href="http://jmather.com/">Jacob Mather</a>.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li class="active"><i class="icon-question-sign"></i></li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <h1>404</h1>
+        <p>Unfortunately the page you requested does not exist. <a href="https://github.com/fabstei/editionista/issues">Let us know</a> and we will try to fix it!</p>
+    </div>
+</div>
+{% endblock %}

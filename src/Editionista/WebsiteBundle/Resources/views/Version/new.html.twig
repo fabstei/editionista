@@ -1,0 +1,23 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li><a href="{{ path('version') }}">Versions</a> <span class="divider">/</span></li>
+    <li class="active">New Version</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12 well">
+        <h1>Add a new Version</h1>
+
+        <form class="space" action="{{ path('version_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <p>
+                <button class="btn btn-success" type="submit">Create</button>
+                <a class="btn" href="{{ path('version') }}">Cancel</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

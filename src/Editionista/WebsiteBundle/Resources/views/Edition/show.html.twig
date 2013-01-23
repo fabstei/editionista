@@ -1,0 +1,73 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li><a href="{{ path('home') }}">Editions</a> <span class="divider">/</span></li>
+    <li class="active">{{ entity.name }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid space">
+    <div class="span12">
+        <h1>{{ entity.name }}
+            {% if is_granted('EDIT', entity) %}
+                <a href="{{ path('edition_edit', { 'slug': entity.slug }) }}"><i class="icon-wrench icon-muted icon-muted-hover" data-placement="top" rel="tooltip" data-original-title="Edit"></i></a>
+            {% endif %}
+            <a href="https://github.com/{{ entity.vendor }}/{{ entity.editionName }}/archive/master.zip"><i class="icon-download icon-muted icon-muted-hover" data-placement="top" rel="tooltip" data-original-title="Download Edition as .zip"></i></a>
+        </h1>
+        <h2>
+            <small>Contributed by 
+               {%- for user in entity.users -%}
+                    {% if not loop.first %}, {% endif %}
+                    <a href="{{ path('user_profile', { 'name': user.username }) }}">{{ user.username }}</a>
+               {%- endfor -%}
+            </small>
+        </h2>
+        <div class="row-fluid">
+            <div class="span4">
+                <p><small>Symfony2 version used: {{ entity.version }}{% if entity.reference is not null %} <span class="muted">({{ entity.reference }})</span>{% endif %}</small></p>
+                <p><small>Git clone url: <a href="https://github.com/{{ entity.vendor }}/{{ entity.editionName }}">https://github.com/{{ entity.vendor }}/{{ entity.editionName }}</a></small></p>
+                {% if entity.homepage is not null %}<p><small>Homepage: <a href="{{ entity.homepage }}">{{ entity.homepage }}</a></small></p>{% endif %}
+            </div>
+            <div class="span4">
+                <p><small>Last repository update: {{ time_diff(entity.updatedRepositoryAt) }}</small></p>
+                <p>
+                    <small>Tags: 
+                        {%- for tag in entity.tags -%}
+                            {% if not loop.first %}, {% endif %}
+                            {{ tag.name }}
+                        {%- endfor -%}
+                    </small>
+                </p>
+            </div>
+            <div class="span4">
+                {% if 'other' not in entity.licenseType %}
+                    <p><small>License: {{ entity.licenseType|capitalize }}</small></p>
+                {% endif %}
+                {% if entity.travis is not null %}
+                    <p><a href="https://travis-ci.org/{{ entity.vendor }}/{{ entity.editionName }}"><img src="https://travis-ci.org/{{ entity.vendor }}/{{ entity.editionName }}.png" /></a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid space">
+    <div class="span12 well">
+        <p>{{ entity.description }}</p>
+    </div>
+</div>
+<div class="row-fluid space">
+    <div class="span12">
+        <ul class="nav nav-tabs" id="tabs">
+            {% if entity.readme is not null %}<li class="active"><a href="#readme">Readme</a></li>{% endif %}
+            {% if entity.license is not null and 'other' in entity.licenseType %}<li{% if entity.readme is null %} class="active"{% endif %}><a href="#license">License</a></li>{% endif %}
+        </ul>
+        
+        <div class="tab-content well">
+            {% if entity.readme is not null %}<div class="tab-pane active" id="readme">{{ entity.readme  | format_text('markdown') | raw }}</div>{% endif %}
+            {% if entity.license is not null and 'other' in entity.licenseType %}<div class="tab-pane {% if entity.readme is not null %}fade{% else %}active{% endif %}" id="license">{{ entity.license }}</div>{% endif %}
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

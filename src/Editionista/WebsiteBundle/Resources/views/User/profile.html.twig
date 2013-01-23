@@ -1,0 +1,33 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% import "EditionistaWebsiteBundle::macros.html.twig" as macros %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li class="active">{{ user.username }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <h1>
+            {{ user.username }}
+            {% if user.username == app.user.username %}
+                <a href="{{ path('fos_user_profile_edit') }}"><i class="icon-wrench icon-muted icon-muted-hover"></i></a>
+            {% endif %}
+        </h1>
+        <p>
+            Member since {{ user.createdAt|date('M d, Y') }}{% if user.editions| length == 1 %}, contributed one Edition{% elseif user.editions| length > 1 %}, contributed {{ user.editions | length | number_format_spellout }} Editions{% endif %}.
+        </p>
+        {% if is_granted('ROLE_ADMIN') %}
+            <p>Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+        {% endif %}
+        {% if user.homepage %}
+            <p>Website: <a href="{{ user.homepage }}">{{ user.homepage }}</a></p>
+        {% endif %}
+            
+        <h2 class="space">Editions</h2>
+        {{ macros.Editions(editions) }}
+    </div>
+</div>
+{% endblock %}

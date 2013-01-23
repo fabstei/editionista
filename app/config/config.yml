@@ -1,0 +1,124 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trust_proxy_headers: false # Deprecated in 2.0; will be removed in 2.3 (used trusted_proxies instead)
+    trusted_proxies: ~
+    session:         ~
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        google_analytics: %google_analytics%
+        editionista_host: %editionista_host%
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ ]
+    filters:
+        cssrewrite: ~
+        lessphp:
+            file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
+            apply_to: "\.less$"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    encryption: ssl
+    auth_mode:  login
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+    
+# KNP Menu
+knp_menu:
+  twig:
+    template: "EditionistaWebsiteBundle:Menu:menu_generic.html.twig"
+    
+# KNP Time
+knp_time: ~
+    
+# FOS UserBundle    
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class: Editionista\WebsiteBundle\Entity\User
+    use_username_form_type: true
+    from_email:
+        address:        %mailer_from_email%
+        sender_name:    %mailer_from_name%
+    registration:
+        form:
+            handler: editionista.form.handler.registration
+    profile:
+        form:
+            type:       editionista_user_profile
+            
+# HWI Oauth
+hwi_oauth:
+    firewall_name: main
+    http_client:
+        verify_peer:   false # Setting allowing you to turn off SSL verification, by default: true
+    connect:
+        account_connector: editionista.user_provider
+        registration_form_handler: editionista.oauth.registration_form_handler
+        registration_form: editionista.oauth.registration_form
+    resource_owners:
+        github:
+            type:          github
+            client_id:     %github.client_id%
+            client_secret: %github.client_secret%
+            
+# Stof DoctrineExtensions            
+stof_doctrine_extensions:
+    default_locale: %locale%
+    orm:
+        default:
+            sluggable: true
+            
+            
+#Sonata Formatter Bundle
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions: []
+
+        text:
+            service: sonata.formatter.text.text
+            extensions: []
+
+        twig:
+            service: sonata.formatter.text.twigengine
+            extensions: [] # Twig formatter cannot have extensions

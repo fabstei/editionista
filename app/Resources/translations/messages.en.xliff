@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="messages.en.xliff">
+        <body>
+            <trans-unit id="1">
+                <source>menu.profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>menu.change_password</source>
+                <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>menu.logout</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>menu.switchback</source>
+                <target>Switch back</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>menu.switchtouser</source>
+                <target>Switch to User</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>menu.switchtoadmin</source>
+                <target>Switch to Admin</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>menu.login</source>
+                <target>Login</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

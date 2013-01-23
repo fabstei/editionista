@@ -1,0 +1,19 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% import "EditionistaWebsiteBundle::macros.html.twig" as macros %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li><a href="{{ path('tags') }}">Tags</a> <span class="divider">/</span></li>
+    <li class="active">{{ tag.name }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <h1>Tag <span class="muted">&ldquo;</span> {{ tag.name }} <span class="muted">&rdquo;</span></h1>
+        <p>Editions tagged &ldquo;{{ tag.name }}&rdquo;</p>
+        {{ macros.Editions(editions) }}
+    </div>
+</div>
+{% endblock %}

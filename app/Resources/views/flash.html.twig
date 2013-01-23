@@ -1,0 +1,12 @@
+<div class="row-fluid">
+    {% block flashes %}
+        {% for type, flashMessages in app.session.flashbag.all() %}
+            {% for flashMessage in flashMessages %}
+                <div class="alert alert-{{ type }} fade in out" data-alert="alert">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <strong>{{ type|upper }}:</strong> {{ flashMessage }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endblock %}
+</div>

@@ -1,0 +1,33 @@
+{% macro Editions(editions) %}
+    {% for edition in editions %}
+        <div class="row-fluid fix-margin {% if loop.first %}space{% endif %}">
+            <div class="span12 well well-hover">
+                <div class="span12">
+                    <h2>
+                        <a href="{{ path('edition_show', {'slug': edition.slug }) }}">{{ edition.name }}</a>
+                        <small>By 
+                            {% for user in edition.users %}{% if not loop.first %}, {% endif %}<a href="{{ path('user_profile', { 'name': user.username }) }}">{{ user.username }}</a>{% endfor %}
+                        </small>
+
+                    </h2>
+                    <p>
+                        <small>Symfony2 version used: {{ edition.version }}</small>
+                        <br />
+                        <small>Last updated: {{ time_diff(edition.updatedRepositoryAt) }}</small>
+                    </p>
+                    {% if edition.description|length %}
+                        <br />
+                        <strong>Description</strong>
+                        <p>{{ edition.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row-fluid fix-margin space">
+            <div class="span12 well">
+                <p>Not yet submitted any Editions.</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}

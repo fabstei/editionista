@@ -1,0 +1,26 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% import "EditionistaWebsiteBundle::macros.html.twig" as macros %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li><a href="{{ path('version') }}">Versions</a> <span class="divider">/</span></li>
+    <li class="active">{{ entity.name }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid space">
+    <div class="span12">
+        <h1>
+            Version <span class="muted">&ldquo;</span> {{ entity.name }} <span class="muted">&rdquo;</span>
+            <small>
+                <a href="{{ path('version_edit', { 'id': entity.id }) }}"><i class="icon-wrench icon-muted icon-muted-hover"  data-placement="top" rel="tooltip" data-original-title="Edit"></i></a> 
+                <a href="{{ path('version_delete', { 'id': entity.id }) }}"><i class="icon-trash icon-muted icon-muted-hover"  data-placement="top" rel="tooltip" data-original-title="Delete"></i></a>
+            </small>
+        </h1>
+
+        <p class="space">Editions using this version</p>
+        {{ macros.Editions(entity.editions) }}
+    </div>
+</div>
+{% endblock %}

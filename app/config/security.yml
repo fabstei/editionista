@@ -1,0 +1,62 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    acl:
+        connection: default
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    providers:
+        editionista:
+            id: editionista.user_provider
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+            form_login:
+                provider:       editionista
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
+                failure_path:   null
+            remember_me:
+                key: %remember_me.secret%
+                user_providers: editionista
+                name: pauth
+                remember_me_parameter: _remember_me
+                lifetime: 31104000 # 1y
+            logout:       true
+            anonymous:    true
+            oauth:
+                resource_owners:
+                    github: "/login/check-github"
+                login_path:        /login
+                failure_path:      /login
+                oauth_user_provider:
+                    service: editionista.user_provider
+            switch_user:
+                provider: editionista
+                    
+    access_control:
+        # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
+        - { path: ^/_wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # AsseticBundle paths used when using the controller for assets
+        - { path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/edition/add, role: ROLE_USER }
+        - { path: ^/profile/, role: ROLE_USER }
+        - { path: ^/version/, role: ROLE_ADMIN }
+        
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

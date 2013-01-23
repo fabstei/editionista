@@ -1,0 +1,23 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li class="active">Versions</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12 well">
+        <h1>Versions <small><a href="{{ path('version_new') }}"><i class="icon-plus-sign icon-muted icon-muted-hover"  data-placement="top" rel="tooltip" data-original-title="Add a new Version"></i></a></small></h1>
+        <p>Currently supported versions</p>
+        <ul class="unstyled">
+        {%- for version in entities -%}
+            <li>
+                <a href="{{ path('version_show', { 'id': version.id })}}">{{ version.name }}</a> 
+                <a href="{{ path('version_edit', { 'id': version.id }) }}"><i class="icon-wrench icon-muted icon-muted-hover"  data-placement="top" rel="tooltip" data-original-title="Edit"></i></a> 
+            </li>
+        {%- endfor -%}
+        </ul>
+    </div>
+</div>
+{% endblock %}

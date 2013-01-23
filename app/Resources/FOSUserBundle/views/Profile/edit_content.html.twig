@@ -1,0 +1,7 @@
+<div class="well">
+    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+        {{ form_widget(form) }}       
+            <input type="submit" class="btn btn-success" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}"  />
+            <a href="{{ path('fos_user_profile_show') }}" class="btn">Cancel</a>
+    </form>
+</div>

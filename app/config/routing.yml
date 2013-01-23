@@ -1,0 +1,39 @@
+# Editionista
+editionista_website:
+    resource: "@EditionistaWebsiteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+# FOS UserBundle
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_profile_show:
+    pattern: /profile/
+    defaults: { _controller: EditionistaWebsiteBundle:User:myProfile }
+    requirements:
+        _method: GET
+
+# HWI OauthBundle
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+# overrides the fosub /login page
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+
+github_check:
+    pattern: /login/check-github
+
+logout:
+    pattern: /logout
+    
+login:
+  pattern: /login/github

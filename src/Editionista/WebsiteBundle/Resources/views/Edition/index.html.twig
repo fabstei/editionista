@@ -1,0 +1,49 @@
+{% extends "EditionistaWebsiteBundle::layout.html.twig" %}
+
+{% import "EditionistaWebsiteBundle::macros.html.twig" as macros %}
+
+{% block alert %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="active"><i class="icon-home"></i> Home</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid space">
+    <div class="span12">
+        <h1>Editionista</h1>
+        <p>Enjoy Symfony2 in every flavour!</p>
+    </div>
+</div>
+<div class="row-fluid space">
+    <div class="span4">
+        <h3>What?</h3>
+        <div class="span3">
+            <i class="icon-cogs icon-4x icon-muted pull-left"></i>
+        </div>
+        <div class="span8">
+            Editionista is a community driven hub for <a href="http://symfony.com/distributions">Symfony2 Distributions</a>. You can <a href="{{ path('edition_add_list') }}">add your own</a> or browse existing ones.
+       </div>
+    </div>
+    <div class="span4">
+        <h3>Why?</h3>
+        <div class="span3">
+            <i class="icon-heart icon-4x icon-muted pull-left"></i>
+        </div>
+        <div class="span8">
+            Distributions offer reusable and still flexible starting points for your projects. Editionista aims to complement the <a href="http://symfony.com/download">official</a> Distributions with community additions. 
+       </div>
+    </div>
+    <div class="span4">
+        <h3>Who?</h3>
+        <div class="span3">
+            <i class="icon-group icon-4x icon-muted pull-left"></i>
+        </div>
+        <div class="span8">
+            Patched together during a short weekend Editionista still lacks content and most features. Feedback and <a href="http://github.com/fabstei/editionista">contributions</a> are most welcome!
+       </div>
+    </div>
+</div>
+{{ macros.Editions(entities) }}
+{% endblock %}

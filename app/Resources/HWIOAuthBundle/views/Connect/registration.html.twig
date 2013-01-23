@@ -1,0 +1,48 @@
+{% extends 'HWIOAuthBundle::layout.html.twig' %}
+
+{% block breadcrumbs %}
+    <li><a href="{{ path('home') }}"><i class="icon-home"></i> Home</a> <span class="divider">/</span></li>
+    <li class="active">Register using Github</li>
+{% endblock %}
+
+{% block hwi_oauth_content %}
+    {% form_theme form with '::form.html.twig' %}
+
+    <div class="row space">
+        <legend>Registration</legend>
+        <div class="span3 offset1">
+            {% if userInformation.response.gravatar_id is not empty %}
+                <a href="https://en.gravatar.com/emails/" target="_blank"><img src="https://secure.gravatar.com/avatar/{{ userInformation.response.gravatar_id }}?s=150" class="img-polaroid img-rounded" rel="tooltip" title="Change your image on gravatar.com" data-placement="bottom"  /></a>
+            {% endif %}
+        </div>
+        <div class="span3">
+            <form action="{{ path('hwi_oauth_connect_registration', {'key': key}) }}" {{ form_enctype(form) }} method="POST" class="hwi_oauth_registration_register">
+                
+                <p>
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username) }}
+                </p>
+                <br />
+                <p>
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, { value : userInformation.response.email }) }}
+                </p>
+        </div>
+        <div class="span3">
+                {{ form_label(form.homepage) }}
+                {{ form_widget(form.homepage, { value : userInformation.response.blog }) }}
+                
+                <br />
+                
+                <p>
+                    <button type="submit" class="btn btn-primary">{{ 'connect.registration.submit'|trans({}, 'HWIOAuthBundle') }}</button>
+                    <a href="{{ path('home') }}" class="btn">Cancel</a>
+                </p>
+
+                {{ form_widget(form.gravatar, { value : userInformation.response.gravatar_id }) }}
+
+                {{ form_widget(form) }}
+                </form>
+        </div>
+    </div>
+{% endblock hwi_oauth_content %}

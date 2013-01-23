@@ -1,0 +1,56 @@
+services:
+# KNP MenuBundle
+    editionista_main.menu_builder:
+        class: Editionista\WebsiteBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory", "@translator", "@security.context"]
+
+    editionista_main.menu.main:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: editionista_main.menu_builder
+        factory_method: createMainNav
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main }
+            
+    editionista_main.menu.right:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: editionista_main.menu_builder
+        factory_method: createRightNav
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: right }
+            
+# HWI OauthBundle
+    editionista.user_provider:
+        class: Editionista\WebsiteBundle\Security\Provider\UserProvider
+        public: false
+        arguments: ["@fos_user.user_manager"]
+
+    editionista.oauth.registration_form_handler:
+        class: Editionista\WebsiteBundle\Form\Handler\OAuthRegistrationFormHandler
+        arguments: ["@fos_user.user_manager", "@fos_user.util.token_generator"]
+
+    editionista.oauth.registration_form_type:
+        class: Editionista\WebsiteBundle\Form\Type\OAuthRegistrationFormType
+        tags:
+            - { name: form.type, alias: editionista_oauth_user_registration }
+
+    editionista.oauth.registration_form:
+        factory_method: create
+        factory_service: form.factory
+        class: Symfony\Component\Form\Form
+        arguments:
+            - 'editionista_oauth_user_registration'
+
+    editionista.form.handler.registration:
+        class: Editionista\WebsiteBundle\Form\Handler\RegistrationFormHandler
+        parent: fos_user.registration.form.handler.default
+        scope: request
+
+    editionista.profile.form.type:
+        class: Editionista\WebsiteBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: editionista_user_profile }
