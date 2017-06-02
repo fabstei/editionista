@@ -1,4 +1,6 @@
-Editionista.com Source
-========================
+Editionista.com 
+================
 
-[Editionista.com](http://editionista.com) source code. Contributions in every form are very welcome!
+Symfony Editions never really took off, neither did editionista. The repository is unfortunately abandoned already for quite some time.
+
+Four years later there are exciting new things on the horizon with Symfony4 - [read all about it on the Blog of Fabian Potencier](http://fabien.potencier.org/symfony4-compose-applications.html).
